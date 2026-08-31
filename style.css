@@ -1,0 +1,101 @@
+body {
+    background-color: #f0f2f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+#modulo-clima {
+    background: linear-gradient(135deg, #74ebd5 0%, #acb6e5 100%);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1a4a5a;
+    box-shadow: 0 4xp 6xp rgba(0,0,0,0.1);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+li button { 
+    margin-left: auto;
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+li button:hover {
+    background-color: #ff6b81;
+}
+li span {
+    flex-grow: 1;
+}
+/* 1. Ordenamos la fila de controles */
+#controles {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* 2. Buscamos la regla que ya tenías de tu input y la cambiamos así: */
+input[type="text"] {
+    padding: 10px;
+    flex-grow: 1; /* ESTO ES LA CLAVE: "Toma todo el espacio sobrante" */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: white;
+            cursor: pointer;
+        }
+#btn-agregar {
+    padding: 10px 15px;
+    background-color: #2ed573;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.trabajo {
+    border-left: 6px solid #3498db;
+}
+.casa { 
+    border-left: 6px solid #e74c3c;
+}
+.personal {
+    border-left: 6px solid #9b59b6;
+}
+.caja-botones {
+    display: flex;
+    gap: 8px; /* Espacio entre los dos botones */
+    flex-shrink: 0; 
+}
+h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }

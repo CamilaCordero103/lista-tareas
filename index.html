@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <h1 id="dashboard">Mi Dashboard</h1>
+    <div id="modulo-clima">
+        <h3 id="texto-clima">Buscando el clima en tu ciudad... ☁️</h3>
+    </div>
+    <div id="controles">
+        <input type="text" id="nueva-tarea" placeholder="¿Cuál será nuestra próxima tarea?">
+        
+        <select id="categoria-tarea">
+            <option value="Trabajo">💼 Trabajo</option>
+            <option value="Casa">🏠 Casa</option>
+            <option value="Personal">🧘🏻 Personal</option>
+        </select>
+        <select id="prioridad-tarea">
+            <option value="⭐">1 ⭐</option>
+            <option value="⭐⭐">2 ⭐</option>
+            <option value="⭐⭐⭐">3 ⭐</option>
+            <option value="⭐⭐⭐⭐">4 ⭐</option>
+            <option value="⭐⭐⭐⭐⭐">5 ⭐</option>
+        </select>
+
+        <button id="btn-agregar">Agregar</button>
+    </div>
+
+    <div id="tableros">
+        <h3>💼 Trabajo</h3>
+        <ul id="lista-trabajo"></ul>
+
+        <h3>🏠 Casa</h3>
+        <ul id="lista-casa"></ul>
+
+        <h3>🧘🏻 Personal</h3>
+        <ul id="lista-personal"></ul>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
