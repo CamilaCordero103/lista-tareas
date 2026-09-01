@@ -321,11 +321,11 @@ inputHabito.addEventListener("keypress", function(evento) {
 
 const botonesSonido = document.querySelectorAll(".btn-sonido");
 
-// 1. Audios alojados en Internet Archive (Sin bloqueos de seguridad)
+// Ahora llamamos a tus archivos locales, ¡adiós a los bloqueos de internet!
 const audios = {
-    lluvia: new Audio("https://ia800106.us.archive.org/11/items/rain-sounds/Rain.mp3"),
-    bosque: new Audio("https://ia600407.us.archive.org/19/items/birds-singing-in-the-forest/birds-singing-in-the-forest.mp3"),
-    cafe: new Audio("https://ia802708.us.archive.org/34/items/coffee-shop-ambience/coffee-shop.mp3")
+    lluvia: new Audio("sonidos/lluvia.mp3"),
+    bosque: new Audio("sonidos/bosque.mp3"),
+    prado: new Audio("sonidos/prado.mp3") // <- El cambio está aquí
 };
 
 // 2. Hacemos que los audios se repitan infinitamente (loop)
