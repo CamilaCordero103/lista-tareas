@@ -1,20 +1,24 @@
+/* 1. Fondo de puntitos y tipografía redondeada */
 body {
-    background-color: #f0f2f5;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-    max-width: 500px;
+    background-color: #fdfbf7; /* Color papel crema */
+    background-image: radial-gradient(#d5d0c4 1px, transparent 0); /* Puntitos de cuaderno */
+    background-size: 20px 20px;
+    font-family: 'Quicksand', sans-serif;
+    color: #5c4b51; /* Texto café oscuro en lugar de negro duro */
+    max-width: 550px;
     margin: 40px auto;
     padding: 20px;
 }
 
+/* 2. Clima estilo acuarela */
 #modulo-clima {
-    background: linear-gradient(135deg, #74ebd5 0%, #acb6e5 100%);
+    background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%); /* Menta a lima pastel */
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 15px;
     text-align: center;
     margin-bottom: 20px;
-    color: #1a4a5a;
-    box-shadow: 0 4xp 6xp rgba(0,0,0,0.1);
+    color: #4a6c5b;
+    border: 2px dashed #95d4bc;
 }
 
 ul {
@@ -23,16 +27,33 @@ ul {
 }
 
 li {
-    background-color: white;
     padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 12px;
+    border-radius: 12px;
+    /* Sombra plana estilo "sticker" */
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.05); 
     display: flex;
     align-items: center;
     gap: 15px;
+    /* Borde por defecto estilo libreta */
+    border: 2px dashed #e0dcd3; 
 }
-
+li button:nth-of-type(1) {
+    background-color: #fef08a; /* Amarillo pastel */
+    color: #854d0e;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+li button:nth-of-type(2) {
+    background-color: #fecaca; /* Rojo pastel */
+    color: #991b1b;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
 li button { 
     margin-left: auto;
     background-color: #ff4757;
@@ -73,21 +94,25 @@ select {
         }
 #btn-agregar {
     padding: 10px 15px;
-    background-color: #2ed573;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    background-color: #ffd3b6; /* Durazno pastel */
+    color: #8c5b3e;
+    border: 2px solid #ffcaa6;
+    border-radius: 10px;
     cursor: pointer;
-    font-weight: bold;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
 }
 .trabajo {
-    border-left: 6px solid #3498db;
+    background-color: #e0f2fe; /* Azul cielo pastel */
+    border-color: #bae6fd;
 }
-.casa { 
-    border-left: 6px solid #e74c3c;
+.casa {
+    background-color: #ffe4e6; /* Rosa suave */
+    border-color: #fecdd3;
 }
 .personal {
-    border-left: 6px solid #9b59b6;
+    background-color: #f3e8ff; /* Lila pastel */
+    border-color: #e9d5ff;
 }
 .caja-botones {
     display: flex;
@@ -95,7 +120,13 @@ select {
     flex-shrink: 0; 
 }
 h1 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+}
+h3 {
+    color: #8a7c81;
+    margin-top: 30px;
+    border-bottom: 2px dashed #e0dcd3;
+    padding-bottom: 5px;
+}
