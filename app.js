@@ -194,25 +194,171 @@ const textoClima = document.querySelector("#texto-clima");
 async function obtenerClima(){
 
     try {
-            // La dirección de la API (El menú del mesero)
-    const url = "https://api.open-meteo.com/v1/forecast?latitude=-33.4569&longitude=-70.6483&current_weather=true";
+        const url = "https://api.open-meteo.com/v1/forecast?latitude=-33.4569&longitude=-70.6483&current_weather=true&daily=temperature_2m_max&timezone=auto";
+        
+        const respuesta = await fetch(url);
+        const datosClima = await respuesta.json();
 
-    //Mandamos al mesero y esperamos (await)
-    const respuesta = await fetch(url);
+        //Imprimimos el clima actual
+        const temperaturaActual = datosClima.current_weather.temperature;
+        textoClima.textContent = `Santiago: ${temperaturaActual}°C 🌡️`;
 
-    //Desempacamos la caja de datos
-    const datosClima = await respuesta.json();
+        //Atrapamos la repisa vacía del HTML
+        const contenedorPronostico = document.querySelector ("#pronostico-dias");
+        contenedorPronostico.innerHTML = ""; //La limpiamos por si acaso
 
-    // //Imprimimos la caja copmleta en la consola para ver qué trajo
-    // console.log (datosClima);
+        //Un bucle para fabricar los 3 cuadritos del futuro (Mañana, Pasado y el siguiente)
+        //Usamos índices 1, 2 y 3 porque el 0 es el día de hoy
+        const diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 
-    //Temperatura!
-    const temperatura = datosClima.current_weather.temperature;
+        for (let i = 1; i <= 3;i ++){
+            const tempMax = datosClima.daily.temperature_2m_max[i];
 
-    textoClima.textContent = `Clima actual en Santiago: ${temperatura}°C 🌡️`;
+            //Transformamos la fecha que nos da la API a un día de la semana real
+            const fechaString = datosClima.daily.time[i];
+            const fecha = new Date(fechaString + "T00:00:00"); // T00:00:00 evita saltos de zona horaria
+            const nombreDia = diasSemana[fecha.getDay()];
+
+            //Fabricamos el cuadrito
+            const cuadrito = document.createElement("div");
+            cuadrito.classList.add("cuadrito-clima");
+
+            //Le inyectamos el HTML por dentro (Día arriba, temperatura abajo)
+            cuadrito.innerHTML = `<strong>${nombreDia}</strong> ${tempMax}°C`;
+
+            //Lo ponemos en la repisa
+            contenedorPronostico.appendChild(cuadrito);
+        }
+
     }
     catch (error){
         textoClima.textContent = "No se pudo cargar el clima 🌧️";
     }
 }
 obtenerClima();
+
+// ==========================================
+// MÓDULO: RASTREADOR DE HÁBITOS
+// ==========================================
+
+let arregloHabitos = JSON.parse(localStorage.getItem("misHabitos")) || [];
+const listaHabitos = document.querySelector("#lista-habitos");
+const inputHabito = document.querySelector("#input-habito");
+
+// 1. Función para dibujar los hábitos en pantalla
+function dibujarHabitos() {
+    listaHabitos.innerHTML = ""; // Limpiamos la lista visual
+
+    for (let i = 0; i < arregloHabitos.length; i++) {
+        const habito = arregloHabitos[i];
+        
+        const itemHabito = document.createElement("li");
+        
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = habito.completado;
+        
+        const spanTexto = document.createElement("span");
+        spanTexto.textContent = habito.nombre;
+        spanTexto.style.flexGrow = "1";
+        
+        // Si está completado, lo tachamos suavemente
+        if (habito.completado) {
+            spanTexto.style.textDecoration = "line-through";
+            spanTexto.style.color = "#a4b0be";
+        }
+
+        // El vigilante del checkbox
+        checkbox.addEventListener("change", function() {
+            habito.completado = checkbox.checked;
+            localStorage.setItem("misHabitos", JSON.stringify(arregloHabitos));
+            dibujarHabitos(); // Redibujamos para actualizar el tachado
+        });
+
+        // Botón mini para borrar el hábito
+        const botonBorrar = document.createElement("button");
+        botonBorrar.textContent = "✖";
+        botonBorrar.style.background = "none";
+        botonBorrar.style.border = "none";
+        botonBorrar.style.color = "#e74c3c";
+        botonBorrar.style.cursor = "pointer";
+        
+        botonBorrar.addEventListener("click", function() {
+            arregloHabitos.splice(i, 1); // Lo borramos del arreglo
+            localStorage.setItem("misHabitos", JSON.stringify(arregloHabitos));
+            dibujarHabitos(); // Redibujamos la pantalla
+        });
+
+        itemHabito.appendChild(checkbox);
+        itemHabito.appendChild(spanTexto);
+        itemHabito.appendChild(botonBorrar);
+        
+        listaHabitos.appendChild(itemHabito);
+    }
+}
+
+// 2. Despertar la app: Dibujamos lo que haya en la memoria
+dibujarHabitos();
+
+// 3. Agregar un hábito nuevo al presionar la tecla "Enter"
+inputHabito.addEventListener("keypress", function(evento) {
+    if (evento.key === "Enter" && inputHabito.value.trim() !== "") {
+        const nuevoHabito = {
+            nombre: inputHabito.value,
+            completado: false
+        };
+        
+        arregloHabitos.push(nuevoHabito);
+        localStorage.setItem("misHabitos", JSON.stringify(arregloHabitos));
+        
+        inputHabito.value = ""; // Limpiamos el input
+        dibujarHabitos(); // Redibujamos
+    }
+});
+// ==========================================
+// MÓDULO: SONIDOS AMBIENTALES
+// ==========================================
+
+const botonesSonido = document.querySelectorAll(".btn-sonido");
+
+// 1. Audios alojados en Internet Archive (Sin bloqueos de seguridad)
+const audios = {
+    lluvia: new Audio("https://ia800106.us.archive.org/11/items/rain-sounds/Rain.mp3"),
+    bosque: new Audio("https://ia600407.us.archive.org/19/items/birds-singing-in-the-forest/birds-singing-in-the-forest.mp3"),
+    cafe: new Audio("https://ia802708.us.archive.org/34/items/coffee-shop-ambience/coffee-shop.mp3")
+};
+
+// 2. Hacemos que los audios se repitan infinitamente (loop)
+for (let clave in audios) {
+    audios[clave].loop = true;
+}
+
+let sonidoActual = null; // Variable para recordar qué está sonando
+
+// 3. Le damos vida a los botones
+botonesSonido.forEach(function(boton) {
+    boton.addEventListener("click", function() {
+        const tipoSonido = boton.getAttribute("data-sonido");
+
+        // Caso A: Haces clic en el sonido que YA está sonando (Lo apagamos)
+        if (sonidoActual === tipoSonido) {
+            audios[tipoSonido].pause();
+            boton.classList.remove("activo");
+            sonidoActual = null;
+        } 
+        // Caso B: Haces clic en un sonido nuevo
+        else {
+            // Si había un sonido diferente sonando, lo pausamos primero
+            if (sonidoActual !== null) {
+                audios[sonidoActual].pause();
+                // Le quitamos el color verde al botón anterior
+                document.querySelector(".btn-sonido.activo").classList.remove("activo");
+            }
+            
+            // Le damos play al nuevo sonido y pintamos el botón
+            audios[tipoSonido].play();
+            boton.classList.add("activo");
+            sonidoActual = tipoSonido; // Memorizamos qué está sonando ahora
+        }
+    });
+});

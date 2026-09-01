@@ -5,22 +5,68 @@ body {
     background-size: 20px 20px;
     font-family: 'Quicksand', sans-serif;
     color: #5c4b51; /* Texto café oscuro en lugar de negro duro */
-    max-width: 550px;
     margin: 40px auto;
     padding: 20px;
+}
+/* 1. El tablero principal (Grid) */
+#bento-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr; /* Col. izq de 350px, Col. der toma el resto */
+    gap: 25px;
+    max-width: 1100px; /* Hacemos el dashboard mucho más ancho */
+    margin: 40px auto;
+}
+
+/* 2. Para que los widgets de la izquierda tengan espacio entre ellos */
+.columna-widgets {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* 3. El estilo de cada tarjeta (Módulos) */
+.bento-card {
+    background-color: rgba(255, 255, 255, 0.6); /* Blanco semi-transparente */
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.03);
+    border: 2px dashed #e0dcd3;
 }
 
 /* 2. Clima estilo acuarela */
 #modulo-clima {
-    background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%); /* Menta a lima pastel */
-    padding: 15px;
+    background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);    padding: 15px;
     border-radius: 15px;
     text-align: center;
     margin-bottom: 20px;
     color: #4a6c5b;
     border: 2px dashed #95d4bc;
+    font-weight: bold;
+}
+/* Contenedor de los cuadritos */
+#pronostico-dias {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+    gap: 10px;
 }
 
+/* El diseño individual de cada cuadrito de clima */
+.cuadrito-clima {
+    background-color: rgba(255, 255, 255, 0.4); /* Blanco muy transparente */
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    border: 1px dashed rgba(74, 108, 91, 0.3); /* Borde punteado sutil */
+    flex-grow: 1; /* Para que se estiren parejo */
+}
+
+/* Para que el día resalte más que la temperatura */
+.cuadrito-clima strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #2d4539;
+}
 ul {
     list-style-type: none;
     padding: 0;
@@ -129,4 +175,56 @@ h3 {
     margin-top: 30px;
     border-bottom: 2px dashed #e0dcd3;
     padding-bottom: 5px;
+}
+#lista-habitos { 
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px;
+}
+#lista-habitos li {
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(74, 108, 91, 0.2);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 0.95em;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+}
+/* El input camuflado de las tarjetas Bento */
+.input-bento { 
+    width: 100%;
+    padding: 8px;
+    border: 1px dashed #c2d6ce;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-family:'Quicksand', sans-serif;
+    box-sizing: border-box;
+}
+/* Contenedor de los botones de sonido */
+.botones-sonido {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+/* Diseño base del botón */
+.btn-sonido {
+    flex-grow: 1;
+    padding: 10px 5px;
+    border: 2px dashed #c2d6ce;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    color: #5c4b51;
+    transition: all 0.3s ease; /* Efecto suave al cambiar de color */
+}
+
+/* Cómo se ve el botón cuando el sonido está reproduciéndose */
+.btn-sonido.activo {
+    background-color: #a8e6cf; /* Verde menta pastel */
+    border-style: solid;
+    font-weight: bold;
 }

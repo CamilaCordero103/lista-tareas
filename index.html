@@ -10,38 +10,78 @@
 <body>
     
     <h1 id="dashboard">Mi Dashboard</h1>
-    <div id="modulo-clima">
-        <h3 id="texto-clima">Buscando el clima en tu ciudad... ☁️</h3>
+    <!-- ESTE ES EL GRAN CONTENEDOR GRID -->
+    <div id="bento-grid">
+
+        <!-- Columna Izquierda (Widgets de Bienestar) -->
+        <div class="columna-widgets">
+            
+            <!-- 1. Tu clima actual (Mete tu div de clima aquí adentro) -->
+            <div id="modulo-clima" class="bento-card">
+                <div id="modulo-clima">
+                    <h3 id="texto-clima">Buscando el clima en tu ciudad... ☁️</h3>
+                    <div id="pronostico-dias"></div>
+                </div>
+            </div>
+
+            <!-- 2. Tu futuro Rastreador de Hábitos -->
+            <div id="modulo-habitos" class="bento-card">
+                <h3>🌱 Hábitos de Hoy</h3>
+                <!-- Aquí vivirán los hábitos-->
+                <ul id="lista-habitos"></ul>
+                <!-- Input para agregar nuevos -->
+                 <input type="text" id="input-habito" placeholder="+ Agregar hábito..." class="input-bento">
+            </div>
+
+            <!-- 3. Tus futuros Sonidos Ambientales -->
+            <div id="modulo-sonidos" class="bento-card">
+                <h3>🎧 Zona de Enfoque</h3>
+                <div class="botones-sonido">
+                    <button class="btn-sonido" data-sonido="lluvia">🌧️ Lluvia</button>
+                    <button class="btn-sonido" data-sonido="bosque">🌲 Bosque</button>
+                    <button class="btn-sonido" data-sonido="cafe">☕ Café</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Columna Derecha (Tu productivad actual) -->
+        <div class="columna-tareas bento-card">
+            
+                <div id="controles">
+                    <input type="text" id="nueva-tarea" placeholder="¿Cuál será nuestra próxima tarea?">
+                    
+                    <select id="categoria-tarea">
+                        <option value="Trabajo">💼 Trabajo</option>
+                        <option value="Casa">🏠 Casa</option>
+                        <option value="Personal">🧘🏻 Personal</option>
+                    </select>
+                    <select id="prioridad-tarea">
+                        <option value="⭐">1 ⭐</option>
+                        <option value="⭐⭐">2 ⭐</option>
+                        <option value="⭐⭐⭐">3 ⭐</option>
+                        <option value="⭐⭐⭐⭐">4 ⭐</option>
+                        <option value="⭐⭐⭐⭐⭐">5 ⭐</option>
+                    </select>
+
+                    <button id="btn-agregar">Agregar</button>
+                </div>
+            
+                <div id="tableros">
+                    <h3>💼 Trabajo</h3>
+                    <ul id="lista-trabajo"></ul>
+
+                    <h3>🏠 Casa</h3>
+                    <ul id="lista-casa"></ul>
+
+                    <h3>🧘🏻 Personal</h3>
+                    <ul id="lista-personal"></ul>
+                </div>
+
+        </div>
+
     </div>
-    <div id="controles">
-        <input type="text" id="nueva-tarea" placeholder="¿Cuál será nuestra próxima tarea?">
-        
-        <select id="categoria-tarea">
-            <option value="Trabajo">💼 Trabajo</option>
-            <option value="Casa">🏠 Casa</option>
-            <option value="Personal">🧘🏻 Personal</option>
-        </select>
-        <select id="prioridad-tarea">
-            <option value="⭐">1 ⭐</option>
-            <option value="⭐⭐">2 ⭐</option>
-            <option value="⭐⭐⭐">3 ⭐</option>
-            <option value="⭐⭐⭐⭐">4 ⭐</option>
-            <option value="⭐⭐⭐⭐⭐">5 ⭐</option>
-        </select>
-
-        <button id="btn-agregar">Agregar</button>
-    </div>
-
-    <div id="tableros">
-        <h3>💼 Trabajo</h3>
-        <ul id="lista-trabajo"></ul>
-
-        <h3>🏠 Casa</h3>
-        <ul id="lista-casa"></ul>
-
-        <h3>🧘🏻 Personal</h3>
-        <ul id="lista-personal"></ul>
-    </div>
+    
     <script src="app.js"></script>
 </body>
 </html>
