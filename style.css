@@ -228,3 +228,17 @@ h3 {
     border-style: solid;
     font-weight: bold;
 }
+/* 1. Hábitos: Rosa/Durazno pastel */
+#modulo-habitos {
+    background: linear-gradient(135deg, #ffe4e6 0%, #fecdd3 100%);
+}
+
+/* 2. Sonidos: Lila/Lavanda pastel */
+#modulo-sonidos {
+    background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+}
+
+/* 3. Tareas: Crema/Vainilla muy suave (para que tus post-its de colores sigan resaltando) */
+.columna-tareas {
+    background: linear-gradient(135deg, #fffff0 0%, #fff3cd 100%);
+}
