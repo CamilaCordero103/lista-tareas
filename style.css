@@ -242,3 +242,13 @@ h3 {
 .columna-tareas {
     background: linear-gradient(135deg, #fffff0 0%, #fff3cd 100%);
 }
+/* Centrar los títulos de los módulos pastel */
+#modulo-habitos h3, 
+#modulo-sonidos h3 {
+    text-align: center;
+}
+.botones-sonido {
+    display: flex;
+    gap: 15px;
+    justify-content: center; /* Alinea los botones al centro */
+}
