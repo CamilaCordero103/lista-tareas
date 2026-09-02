@@ -206,52 +206,62 @@ boton.addEventListener("click", function () {
 });
 
 
-// Atrapamos el elemento HMTL de clima
+// Atrapamos los elementos HTML del clima
 const textoClima = document.querySelector("#texto-clima");
-// Creamos la función asíncrona
+const ciudadClima = document.querySelector("#ciudad-clima");
+const temperaturaActualElemento = document.querySelector("#temperatura-actual");
+const iconoClima = document.querySelector("#icono-clima");
+const contenedorPronostico = document.querySelector("#pronostico-dias");
 
 async function obtenerClima(){
-
     try {
-        const url = "https://api.open-meteo.com/v1/forecast?latitude=-33.4569&longitude=-70.6483&current_weather=true&daily=temperature_2m_max&timezone=auto";
+        // 1. URL modernizada (Open-Meteo prefiere este formato nuevo)
+        const url = "https://api.open-meteo.com/v1/forecast?latitude=-33.4569&longitude=-70.6483&current=temperature_2m&daily=temperature_2m_max&timezone=auto";
         
         const respuesta = await fetch(url);
+        if (!respuesta.ok) {
+            throw new Error(`Error HTTP: ${respuesta.status}`);
+        }
+
         const datosClima = await respuesta.json();
 
-        //Imprimimos el clima actual
-        const temperaturaActual = datosClima.current_weather.temperature;
-        textoClima.textContent = `Santiago: ${temperaturaActual}°C 🌡️`;
+        // 2. Imprimimos el clima actual (adaptado al nuevo formato de la API)
+        const temperaturaActual = datosClima.current.temperature_2m;
+        ciudadClima.textContent = "Santiago";
+        temperaturaActualElemento.textContent = `${temperaturaActual}°C`;
+        iconoClima.textContent = "🌡️";
 
-        //Atrapamos la repisa vacía del HTML
-        const contenedorPronostico = document.querySelector ("#pronostico-dias");
-        contenedorPronostico.innerHTML = ""; //La limpiamos por si acaso
+        contenedorPronostico.innerHTML = ""; // Limpiamos la repisa
 
-        //Un bucle para fabricar los 3 cuadritos del futuro (Mañana, Pasado y el siguiente)
-        //Usamos índices 1, 2 y 3 porque el 0 es el día de hoy
         const diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 
-        for (let i = 1; i <= 3;i ++){
+        // 3. Bucle de 3 días
+        for (let i = 1; i <= 3; i++) {
             const tempMax = datosClima.daily.temperature_2m_max[i];
-
-            //Transformamos la fecha que nos da la API a un día de la semana real
             const fechaString = datosClima.daily.time[i];
-            const fecha = new Date(fechaString + "T00:00:00"); // T00:00:00 evita saltos de zona horaria
+            const fecha = new Date(fechaString + "T00:00:00");
             const nombreDia = diasSemana[fecha.getDay()];
 
-            //Fabricamos el cuadrito
             const cuadrito = document.createElement("div");
             cuadrito.classList.add("cuadrito-clima");
 
-            //Le inyectamos el HTML por dentro (Día arriba, temperatura abajo)
-            cuadrito.innerHTML = `<strong>${nombreDia}</strong> ${tempMax}°C`;
+            const nombreDiaElemento = document.createElement("strong");
+            nombreDiaElemento.textContent = nombreDia;
+            
+            cuadrito.appendChild(nombreDiaElemento);
+            cuadrito.append(` ${tempMax}°C`);
 
-            //Lo ponemos en la repisa
             contenedorPronostico.appendChild(cuadrito);
         }
-
     }
     catch (error){
-        textoClima.textContent = "No se pudo cargar el clima 🌧️";
+        // 4. EL CHIVATO: Esto imprimirá el error real en tu navegador
+        console.error("🕵️‍♂️ Error al buscar el clima:", error);
+        
+        ciudadClima.textContent = "Clima";
+        temperaturaActualElemento.textContent = "No disponible";
+        iconoClima.textContent = "🌧️";
+        contenedorPronostico.innerHTML = "";
     }
 }
 obtenerClima();
