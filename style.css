@@ -2,6 +2,18 @@
     box-sizing: border-box;
     max-width: 100%;
 }
+/* Prevenir desbordamiento horizontal en toda la página */
+html, body {
+    overflow-x: hidden; 
+}
+
+/* Color pastel azul/celeste para el Calendario */
+#modulo-calendario {
+    background: linear-gradient(135deg, #cde4ff 0%, #e8f2ff 100%);
+}
+body.tema-gris #modulo-calendario {
+    background: linear-gradient(135deg, #e6e6e6 0%, #cccccc 100%);
+}
 /* 1. Fondo de puntitos y tipografía redondeada */
 body {
     background-color: #fdfbf7; /* Color papel crema */
@@ -411,14 +423,18 @@ body.tema-gris .dia-cal.hoy { background-color: #555; color: white; }
 /* ==========================================
    RESPONSIVE (Adaptación a celulares)
    ========================================== */
+/* ==========================================
+   RESPONSIVE (Adaptación a celulares)
+   ========================================== */
 @media (max-width: 900px) {
     body {
-        padding: 10px; /* Reducimos el borde blanco en celulares */
+        padding: 15px; 
     }
-
+    
     #bento-grid {
         grid-template-columns: 1fr; 
-        margin: 0 auto; /* Centrado perfecto sin forzar el ancho */
+        margin: 0; /* Eliminamos el margen lateral conflictivo */
+        width: 100%;
         gap: 15px;
     }
 
