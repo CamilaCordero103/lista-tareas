@@ -1,3 +1,22 @@
+// ==========================================
+// MÓDULO: SALUDO DINÁMICO
+// ==========================================
+function establecerSaludo() {
+    // Buscamos el título principal de tu página
+    const tituloPrincipal = document.querySelector("#dashboard"); 
+    const horaActual = new Date().getHours();
+
+    if (horaActual >= 6 && horaActual < 12) {
+        tituloPrincipal.textContent = "Buenos días ☕";
+    } else if (horaActual >= 12 && horaActual < 19) {
+        tituloPrincipal.textContent = "Buenas tardes ☀️";
+    } else {
+        tituloPrincipal.textContent = "Hora de desconectar 🌙";
+    }
+}
+
+// Ejecutamos la función apenas carga la página
+establecerSaludo();
 // let arregloTareas = [];
 let arregloTareas = JSON.parse(localStorage.getItem("listaTareas")) || [];
 
@@ -425,6 +444,20 @@ function cargarDatosDia(dia) {
     inPasatiempos.value = info.pasatiempos;
     inCasa.value = info.casa;
     tituloDia.textContent = `Planeando el ${dia}`;
+
+    // --- MICRO-INTERACCIÓN FADE-IN ---
+    const camposDeTexto = document.querySelectorAll(".grupo-input");
+    
+    camposDeTexto.forEach(campo => {
+        // Le quitamos la clase si ya la tenía
+        campo.classList.remove("efecto-fade");
+        
+        // Este es un "truco" de desarrollador para forzar al navegador a reiniciar la animación
+        void campo.offsetWidth; 
+        
+        // Le volvemos a poner la clase para que aparezca suavemente
+        campo.classList.add("efecto-fade");
+    });
 }
 
 // 5. Lógica de las pestañas (Hacer clic en otro día)
@@ -527,3 +560,21 @@ btnNext.addEventListener("click", function() {
 
 // Arrancar el motor al cargar la página
 dibujarCalendario();
+// ==========================================
+// MÓDULO: INTENCIÓN Y NOTAS RÁPIDAS
+// ==========================================
+const inputIntencion = document.querySelector("#intencion-dia");
+const areaNotas = document.querySelector("#texto-notas");
+
+// 1. Cargar el texto guardado al abrir la página
+inputIntencion.value = localStorage.getItem("intencionDia") || "";
+areaNotas.value = localStorage.getItem("notasRapidas") || "";
+
+// 2. Guardar automáticamente cada vez que se teclea algo
+inputIntencion.addEventListener("input", function() {
+    localStorage.setItem("intencionDia", inputIntencion.value);
+});
+
+areaNotas.addEventListener("input", function() {
+    localStorage.setItem("notasRapidas", areaNotas.value);
+});

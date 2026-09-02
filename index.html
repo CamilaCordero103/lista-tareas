@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
-    <title>Document</title>
+    <title>Lienzo Diario</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     
     <h1 id="dashboard">Mi Dashboard</h1>
+    <div style="text-align: center; margin-bottom: 30px;">
+        <!-- El h1 ya lo tienes, solo pon el input debajo -->
+        <input type="text" id="intencion-dia" placeholder="✨ ¿Cuál es tu intención para hoy? ✨">
+    </div>
     <!-- Colócalo cerca de tu título principal <h1> -->
     <div style="text-align: right; max-width: 1100px; margin: 0 auto;">
         <button id="btn-tema" class="btn-sonido">🌑 Cambiar a Escala de Grises</button>
@@ -23,10 +27,9 @@
             
             <!-- 1. Tu clima actual (Mete tu div de clima aquí adentro) -->
             <div id="modulo-clima" class="bento-card">
-                <div id="modulo-clima">
-                    <h3 id="texto-clima">Buscando el clima en tu ciudad... ☁️</h3>
-                    <div id="pronostico-dias"></div>
-                </div>
+                <h3 style="margin-bottom: 20px; text-align: center;">🌞 Temperatura del día</h3>
+                <h3 id="texto-clima">Buscando el clima en tu ciudad... ☁️</h3>
+                <div id="pronostico-dias"></div>
             </div>
 
             <!-- 2. Tu futuro Rastreador de Hábitos -->
@@ -63,11 +66,21 @@
                 <!-- La cuadrícula donde JavaScript dibujará los números -->
                 <div id="cuadricula-dias" class="cuadricula-calendario"></div>
             </div>
+                        <!-- Módulo de Notas Rápidas -->
+            <div id="modulo-notas" class="bento-card">
+                <h3 style="margin-bottom: 15px;">📝 Notas Rápidas</h3>
+                <textarea id="texto-notas" class="input-semanal" rows="6" placeholder="Escribe lo que tengas en la mente... se guardará solo."></textarea>
+            </div>
 
         </div>
 
-        <!-- Columna Derecha (Tu productivad actual) -->
-        <div class="columna-tareas bento-card">
+<!-- Columna Derecha (Tu productividad actual) -->
+        <div class="columna-tareas">
+            
+            <!-- 1. Tarjeta del Gestor de Tareas -->
+            <div id="modulo-tareas" class="bento-card">
+                <h3 style="margin-bottom: 20px; text-align: center;">🎯 Gestor de Tareas</h3>
+                
                 <div id="controles">
                     <input type="text" id="nueva-tarea" placeholder="¿Cuál será nuestra próxima tarea?">
                     
@@ -76,6 +89,7 @@
                         <option value="Casa">🏠 Casa</option>
                         <option value="Personal">🧘🏻 Personal</option>
                     </select>
+                    
                     <select id="prioridad-tarea">
                         <option value="⭐">1 ⭐</option>
                         <option value="⭐⭐">2 ⭐</option>
@@ -97,54 +111,54 @@
                     <h3>🧘🏻 Personal</h3>
                     <ul id="lista-personal"></ul>
                 </div>
-                <!-- El futuro Planificador Semanal -->
-                <!-- Planificador Semanal -->
-                <div id="modulo-semanal" class="bento-card" style="margin-top: 25px;">
-                    <h3>📅 Menú y Rutina Semanal</h3>
-                    
-                    <!-- Pestañas de los días -->
-                    <div class="botones-dias" id="tabs-dias">
-                        <button class="btn-sonido activo" data-dia="Lunes">Lun</button>
-                        <button class="btn-sonido" data-dia="Martes">Mar</button>
-                        <button class="btn-sonido" data-dia="Miercoles">Mié</button>
-                        <button class="btn-sonido" data-dia="Jueves">Jue</button>
-                        <button class="btn-sonido" data-dia="Viernes">Vie</button>
-                        <button class="btn-sonido" data-dia="Sabado">Sáb</button>
-                        <button class="btn-sonido" data-dia="Domingo">Dom</button>
-                    </div>
-                    
-                    <h4 id="titulo-dia-actual" style="text-align: center; color: #5c4b51; margin-bottom: 20px;">Planeando el Lunes</h4>
+            </div> <!-- AQUÍ CIERRA LA TARJETA DE TAREAS -->
 
-                    <!-- Campos de texto -->
-                    <div class="grupo-input">
-                        <label for="in-almuerzo">🍽️ Almuerzo</label>
-                        <input type="text" id="in-almuerzo" class="input-semanal" placeholder="Ej: Lentejas con arroz...">
-                    </div>
+            <!-- 2. Tarjeta del Planificador Semanal -->
+            <div id="modulo-semanal" class="bento-card" style="margin-top: 25px;">
+                <h3 style="margin-bottom: 20px; text-align: center;">📅 Menú y Rutina Semanal</h3>
+                
+                <!-- Pestañas de los días -->
+                <div class="botones-dias" id="tabs-dias">
+                    <button class="btn-sonido activo" data-dia="Lunes">Lun</button>
+                    <button class="btn-sonido" data-dia="Martes">Mar</button>
+                    <button class="btn-sonido" data-dia="Miercoles">Mié</button>
+                    <button class="btn-sonido" data-dia="Jueves">Jue</button>
+                    <button class="btn-sonido" data-dia="Viernes">Vie</button>
+                    <button class="btn-sonido" data-dia="Sabado">Sáb</button>
+                    <button class="btn-sonido" data-dia="Domingo">Dom</button>
+                </div>
+                
+                <h4 id="titulo-dia-actual" style="text-align: center; color: #5c4b51; margin-bottom: 20px;">Planeando el Lunes</h4>
 
-                    <div class="grupo-input">
-                        <label for="in-cena">🍽️ Cena</label>
-                        <input type="text" id="in-cena" class="input-semanal" placeholder="Ej: Sándwich ligero...">
-                    </div>
+                <!-- Campos de texto -->
+                <div class="grupo-input">
+                    <label for="in-almuerzo">🍽️ Almuerzo</label>
+                    <input type="text" id="in-almuerzo" class="input-semanal" placeholder="Ej: Lentejas con arroz...">
+                </div>
 
-                    <div class="grupo-input">
-                        <label for="in-pasatiempos">🎨 Pasatiempos</label>
-                        <textarea id="in-pasatiempos" class="input-semanal" rows="2" placeholder="Ej: Leer 20 min, pintar..."></textarea>
-                    </div>
+                <div class="grupo-input">
+                    <label for="in-cena">🍽️ Cena</label>
+                    <input type="text" id="in-cena" class="input-semanal" placeholder="Ej: Sándwich ligero...">
+                </div>
 
-                    <div class="grupo-input">
-                        <label for="in-casa">🧹 Tareas de la Casa</label>
-                        <textarea id="in-casa" class="input-semanal" rows="2" placeholder="Ej: Regar plantas, aspirar..."></textarea>
-                    </div>
-                    
-                    <!-- Botón de guardar con mensaje oculto -->
-                    <div style="text-align: right;">
-                        <span id="mensaje-guardado" style="color: #4a6c5b; font-size: 0.9em; margin-right: 15px; opacity: 0; transition: opacity 0.3s;">¡Guardado! ✓</span>
-                        <button id="btn-guardar-dia" class="btn-sonido activo">Guardar Día</button>
-                    </div>
-            </div>
-        </div>
+                <div class="grupo-input">
+                    <label for="in-pasatiempos">🎨 Pasatiempos</label>
+                    <textarea id="in-pasatiempos" class="input-semanal" rows="2" placeholder="Ej: Leer 20 min, pintar..."></textarea>
+                </div>
 
-    </div>
+                <div class="grupo-input">
+                    <label for="in-casa">🧹 Tareas de la Casa</label>
+                    <textarea id="in-casa" class="input-semanal" rows="2" placeholder="Ej: Regar plantas, aspirar..."></textarea>
+                </div>
+                
+                <!-- Botón de guardar con mensaje oculto -->
+                <div style="text-align: right;">
+                    <span id="mensaje-guardado" style="color: #4a6c5b; font-size: 0.9em; margin-right: 15px; opacity: 0; transition: opacity 0.3s;">¡Guardado! ✓</span>
+                    <button id="btn-guardar-dia" class="btn-sonido activo">Guardar Día</button>
+                </div>
+            </div> <!-- AQUÍ CIERRA EL PLANIFICADOR -->
+
+        </div> <!-- AQUÍ CIERRA LA COLUMNA COMPLETA -->
     
     <script src="app.js"></script>
 </body>

@@ -3,12 +3,9 @@
     max-width: 100%;
 }
 
-/* Color pastel azul/celeste para el Calendario */
+/* Fondo pastel azul polvo para el Calendario */
 #modulo-calendario {
-    background: linear-gradient(135deg, #cde4ff 0%, #e8f2ff 100%);
-}
-body.tema-gris #modulo-calendario {
-    background: linear-gradient(135deg, #e6e6e6 0%, #cccccc 100%);
+    background: linear-gradient(135deg, #dce8ee 0%, #edf3f5 100%);
 }
 /* 1. Fondo de puntitos y tipografía redondeada */
 body {
@@ -47,12 +44,12 @@ body {
 
 /* 2. Clima estilo acuarela */
 #modulo-clima {
-    background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);    padding: 15px;
+    background: linear-gradient(135deg, #d9e6dc 0%, #edf2eb 100%);    padding: 15px;
     border-radius: 15px;
     text-align: center;
     margin-bottom: 20px;
-    color: #4a6c5b;
-    border: 2px dashed #95d4bc;
+    color: #4f5d58;
+    border: 2px dashed #b7c9bc;
     font-weight: bold;
 }
 /* Contenedor de los cuadritos */
@@ -160,17 +157,20 @@ select {
     font-family: 'Quicksand', sans-serif;
     font-weight: 700;
 }
-.trabajo {
-    background-color: #e0f2fe; /* Azul cielo pastel */
-    border-color: #bae6fd;
+.trabajo,
+.tarea-trabajo {
+    background: rgba(255, 255, 255, 0.6);
+    border-left: 4px solid #9bb8c2;
 }
-.casa {
-    background-color: #ffe4e6; /* Rosa suave */
-    border-color: #fecdd3;
+.casa,
+.tarea-casa {
+    background: rgba(255, 255, 255, 0.6);
+    border-left: 4px solid #d5b59f;
 }
-.personal {
-    background-color: #f3e8ff; /* Lila pastel */
-    border-color: #e9d5ff;
+.personal,
+.tarea-personal {
+    background: rgba(255, 255, 255, 0.6);
+    border-left: 4px solid #b4adc5;
 }
 .caja-botones {
     display: flex;
@@ -242,18 +242,72 @@ h3 {
 }
 /* 1. Hábitos: Rosa/Durazno pastel */
 #modulo-habitos {
-    background: linear-gradient(135deg, #ffe4e6 0%, #fecdd3 100%);
+    background: linear-gradient(135deg, #dce8dc 0%, #eef3eb 100%);
 }
 
-/* 2. Sonidos: Lila/Lavanda pastel */
+/* 2. Sonidos: Lavanda grisáceo */
 #modulo-sonidos {
-    background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+    background: linear-gradient(135deg, #e3e0e9 0%, #f1eff4 100%);
 }
 
 /* 3. Tareas: Crema/Vainilla muy suave (para que tus post-its de colores sigan resaltando) */
 .columna-tareas {
-    background: linear-gradient(135deg, #fffff0 0%, #fff3cd 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    box-shadow: none;
 }
+/* Color pastel salvia para el Gestor de Tareas */
+#modulo-tareas {
+    background: linear-gradient(135deg, #d7e3d7 0%, #edf2eb 100%);
+}
+/* Color pastel crema para el Menú y Rutina Semanal */
+#modulo-semanal {
+    background: linear-gradient(135deg, #f1eadb 0%, #faf7ef 100%) !important;
+}
+
+/* Paleta pastel inspirada en la referencia; se aplica solo al tema normal. */
+body:not(.tema-gris) #modulo-clima {
+    background: linear-gradient(135deg, #d9e6dc 0%, #edf2eb 100%);
+    color: #4f5d58;
+    border-color: #b7c9bc;
+}
+
+body:not(.tema-gris) #modulo-tareas {
+    background: linear-gradient(135deg, #d7e3d7 0%, #edf2eb 100%) !important;
+    color: #4f5d58;
+}
+
+body:not(.tema-gris) #modulo-semanal {
+    background: linear-gradient(135deg, #f1eadb 0%, #faf7ef 100%) !important;
+    color: #5f5a52;
+}
+
+body:not(.tema-gris) #modulo-calendario {
+    background: linear-gradient(135deg, #dce8ee 0%, #edf3f5 100%);
+    color: #53636a;
+}
+
+body:not(.tema-gris) #modulo-notas {
+    background: linear-gradient(135deg, #e3e0e9 0%, #f1eff4 100%);
+    color: #5f5a68;
+}
+
+body:not(.tema-gris) #modulo-clima h3,
+body:not(.tema-gris) #modulo-clima .cuadrito-clima strong,
+body:not(.tema-gris) #modulo-tareas h3,
+body:not(.tema-gris) #modulo-semanal h3,
+body:not(.tema-gris) #modulo-semanal h4,
+body:not(.tema-gris) #modulo-semanal label,
+body:not(.tema-gris) #modulo-calendario h3,
+body:not(.tema-gris) #modulo-calendario .dias-semana,
+body:not(.tema-gris) #modulo-notas h3 {
+    color: #4f5d58;
+}
+
 /* Centrar los títulos de los módulos pastel */
 #modulo-habitos h3, 
 #modulo-sonidos h3 {
@@ -274,9 +328,26 @@ body.tema-gris {
     color: #333333;
 }
 
+/* Cada tarjeta conserva un degradado gris propio para distinguir los módulos. */
 body.tema-gris .bento-card {
     border-color: #aaaaaa;
-    background-color: rgba(255, 255, 255, 0.8);
+    background: linear-gradient(135deg, #f7f7f7 0%, #dddddd 100%) !important;
+}
+
+body.tema-gris #modulo-tareas {
+    background: linear-gradient(135deg, #eeeeee 0%, #cfcfcf 100%) !important;
+}
+
+body.tema-gris #modulo-semanal {
+    background: linear-gradient(135deg, #fafafa 0%, #d6d6d6 100%) !important;
+}
+
+body.tema-gris #modulo-calendario {
+    background: linear-gradient(135deg, #e4e4e4 0%, #bdbdbd 100%) !important;
+}
+
+body.tema-gris #modulo-notas {
+    background: linear-gradient(135deg, #f2f2f2 0%, #c7c7c7 100%) !important;
 }
 
 /* Sobreescribimos los degradados de cada módulo */
@@ -293,13 +364,81 @@ body.tema-gris #modulo-sonidos {
     background: linear-gradient(135deg, #f2f2f2 0%, #d9d9d9 100%);
 }
 
-body.tema-gris .columna-tareas {
-    background: linear-gradient(135deg, #f9f9f9 0%, #e0e0e0 100%);
+body.tema-gris h1,
+body.tema-gris h3,
+body.tema-gris h4,
+body.tema-gris label,
+body.tema-gris .dias-semana,
+body.tema-gris .cuadrito-clima,
+body.tema-gris .cuadrito-clima strong,
+body.tema-gris .btn-sonido,
+body.tema-gris input,
+body.tema-gris select,
+body.tema-gris option,
+body.tema-gris textarea {
+    color: #333333 !important;
+    border-color: #999999 !important;
+}
+
+body.tema-gris .btn-sonido,
+body.tema-gris input,
+body.tema-gris select,
+body.tema-gris option,
+body.tema-gris textarea,
+body.tema-gris .cuadrito-clima {
+    background: rgba(255, 255, 255, 0.72) !important;
 }
 
 body.tema-gris .btn-sonido.activo {
-    background-color: #999999;
-    color: white;
+    background: #999999 !important;
+    color: #ffffff !important;
+}
+
+body.tema-gris #modulo-habitos li button {
+    background: transparent !important;
+    color: #555555 !important;
+}
+
+/* El gestor de tareas elimina los colores de las categorías y sus controles. */
+body.tema-gris #modulo-tareas,
+body.tema-gris #modulo-tareas h3,
+body.tema-gris #modulo-tareas li,
+body.tema-gris #modulo-tareas button,
+body.tema-gris #modulo-tareas input,
+body.tema-gris #modulo-tareas select,
+body.tema-gris #modulo-tareas option,
+body.tema-gris #modulo-tareas span {
+    color: #333333 !important;
+}
+
+body.tema-gris #modulo-tareas li,
+body.tema-gris #modulo-tareas .trabajo,
+body.tema-gris #modulo-tareas .casa,
+body.tema-gris #modulo-tareas .personal {
+    background: rgba(255, 255, 255, 0.72) !important;
+    border-color: #a6a6a6 !important;
+    box-shadow: 3px 3px 0 rgba(80, 80, 80, 0.12) !important;
+}
+
+body.tema-gris #modulo-tareas button,
+body.tema-gris #modulo-tareas select,
+body.tema-gris #modulo-tareas input[type="text"] {
+    background: rgba(255, 255, 255, 0.82) !important;
+    border: 1px solid #999999 !important;
+}
+
+body.tema-gris #modulo-tareas li button {
+    background: #eeeeee !important;
+    border-color: #999999 !important;
+    color: #333333 !important;
+}
+
+body.tema-gris #modulo-tareas input[type="checkbox"] {
+    accent-color: #666666;
+}
+
+body.tema-gris #modulo-tareas h3 {
+    border-bottom-color: #999999 !important;
 }
 /* ==========================================
    ESTILOS DEL PLANIFICADOR
@@ -347,7 +486,6 @@ body.tema-gris .btn-sonido.activo {
 }
 
 /* Compatibilidad con el Modo Gris */
-body.tema-gris #modulo-semanal { background: linear-gradient(135deg, #e6e6e6 0%, #cccccc 100%); }
 body.tema-gris .grupo-input { background: rgba(0,0,0,0.05); }
 body.tema-gris .input-semanal { border-color: #aaa; }
 body.tema-gris .grupo-input label { color: #333; }
@@ -404,21 +542,71 @@ body.tema-gris .grupo-input label { color: #333; }
     background-color: transparent;
     cursor: default;
 }
+/* Transición suave para cualquier elemento de lista o texto que se tache */
+.tarea-completada {
+    text-decoration: line-through;
+    opacity: 0.6;
+    transition: all 0.3s ease; /* Esto hace que el tachado no sea brusco */
+}
+/* ==========================================
+   ESTILOS DE LA INTENCIÓN DEL DÍA
+   ========================================== */
+#intencion-dia {
+    width: 100%;
+    max-width: 450px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px dashed #c2d6ce;
+    padding: 8px;
+    font-size: 1.1em;
+    color: #5c4b51;
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#intencion-dia:focus {
+    border-bottom: 2px solid #a8e6cf; /* Se ilumina al escribir */
+}
+/* Color pastel lavanda sutil para el Bloc de Notas */
+#modulo-notas {
+    background: linear-gradient(135deg, #e9e5f5 0%, #f7f5fc 100%);
+}
+
+/* Compatibilidad con el Modo Gris */
+body.tema-gris #intencion-dia {
+    color: #333;
+    border-bottom-color: #aaa;
+}
+
+body.tema-gris #intencion-dia:focus {
+    border-bottom-color: #666;
+}
+
+/* Animación de entrada para el planificador */
+@keyframes aparecerSuave {
+    from { 
+        opacity: 0; 
+        transform: translateY(5px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Clase que aplicaremos con JavaScript */
+.efecto-fade {
+    animation: aparecerSuave 0.4s ease forwards;
+}
 
 /* Compatibilidad con el Modo Gris */
 body.tema-gris .dias-semana { color: #333; }
 body.tema-gris .dia-cal { color: #333; background-color: rgba(255, 255, 255, 0.6); }
 body.tema-gris .dia-cal:not(.vacio):hover { background-color: #ccc; }
 body.tema-gris .dia-cal.hoy { background-color: #555; color: white; }
-/* ==========================================
-   RESPONSIVE (Adaptación a celulares)
-   ========================================== */
-/* ==========================================
-   RESPONSIVE (Adaptación a celulares)
-   ========================================== */
-/* ==========================================
-   RESPONSIVE (Adaptación a celulares)
-   ========================================== */
+
 /* ==========================================
    RESPONSIVE (Adaptación a celulares)
    ========================================== */
