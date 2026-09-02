@@ -325,7 +325,7 @@ const botonesSonido = document.querySelectorAll(".btn-sonido");
 const audios = {
     lluvia: new Audio("sonidos/lluvia.mp3"),
     bosque: new Audio("sonidos/bosque.mp3"),
-    prado: new Audio("sonidos/prado.mp3") // <- El cambio está aquí
+    prado: new Audio("sonidos/prado.mp3")
 };
 
 // 2. Hacemos que los audios se repitan infinitamente (loop)
@@ -362,3 +362,168 @@ botonesSonido.forEach(function(boton) {
         }
     });
 });
+// ==========================================
+// MÓDULO: TEMAS VISUALES
+// ==========================================
+const btnTema = document.querySelector("#btn-tema");
+const body = document.body;
+
+// 1. Revisar si el usuario ya tenía guardado el tema gris
+if (localStorage.getItem("tema") === "gris") {
+    body.classList.add("tema-gris");
+    btnTema.textContent = "🌸 Cambiar a Modo Pastel";
+}
+
+// 2. Al hacer clic en el botón
+btnTema.addEventListener("click", function() {
+    body.classList.toggle("tema-gris");
+    
+    if (body.classList.contains("tema-gris")) {
+        localStorage.setItem("tema", "gris");
+        btnTema.textContent = "🌸 Cambiar a Modo Pastel";
+    } else {
+        localStorage.setItem("tema", "pastel");
+        btnTema.textContent = "🌑 Cambiar a Escala de Grises";
+    }
+});
+// ==========================================
+// MÓDULO: PLANIFICADOR SEMANAL
+// ==========================================
+
+// 1. Estructura de datos base (Vacía por defecto)
+const plantillaSemana = {
+    "Lunes": { almuerzo: "", cena: "", pasatiempos: "", casa: "" },
+    "Martes": { almuerzo: "", cena: "", pasatiempos: "", casa: "" },
+    "Miercoles": { almuerzo: "", cena: "", pasatiempos: "", casa: "" },
+    "Jueves": { almuerzo: "", cena: "", pasatiempos: "", casa: "" },
+    "Viernes": { almuerzo: "", cena: "", pasatiempos: "", casa: "" },
+    "Sabado": { almuerzo: "", cena: "", pasatiempos: "", casa: "" },
+    "Domingo": { almuerzo: "", cena: "", pasatiempos: "", casa: "" }
+};
+
+// 2. Extraer los datos de la memoria (o usar la plantilla si es la primera vez)
+let datosSemana = JSON.parse(localStorage.getItem("planSemanal")) || plantillaSemana;
+
+// 3. Atrapar los elementos del HTML
+let diaActivo = "Lunes"; // Empezamos en el Lunes
+const tabsDias = document.querySelectorAll("#tabs-dias .btn-sonido");
+const tituloDia = document.querySelector("#titulo-dia-actual");
+
+const inAlmuerzo = document.querySelector("#in-almuerzo");
+const inCena = document.querySelector("#in-cena");
+const inPasatiempos = document.querySelector("#in-pasatiempos");
+const inCasa = document.querySelector("#in-casa");
+
+const btnGuardarDia = document.querySelector("#btn-guardar-dia");
+const msgGuardado = document.querySelector("#mensaje-guardado");
+
+// 4. Función para inyectar la información del día seleccionado en los campos
+function cargarDatosDia(dia) {
+    const info = datosSemana[dia];
+    inAlmuerzo.value = info.almuerzo;
+    inCena.value = info.cena;
+    inPasatiempos.value = info.pasatiempos;
+    inCasa.value = info.casa;
+    tituloDia.textContent = `Planeando el ${dia}`;
+}
+
+// 5. Lógica de las pestañas (Hacer clic en otro día)
+tabsDias.forEach(boton => {
+    boton.addEventListener("click", function() {
+        // Quitar color al botón anterior
+        document.querySelector("#tabs-dias .activo").classList.remove("activo");
+        // Pintar el nuevo botón
+        boton.classList.add("activo");
+        
+        // Cambiar el día y actualizar los textos
+        diaActivo = boton.getAttribute("data-dia");
+        cargarDatosDia(diaActivo);
+    });
+});
+
+// 6. Botón de Guardar
+btnGuardarDia.addEventListener("click", function() {
+    // Tomar lo que está escrito y guardarlo en la variable
+    datosSemana[diaActivo] = {
+        almuerzo: inAlmuerzo.value,
+        cena: inCena.value,
+        pasatiempos: inPasatiempos.value,
+        casa: inCasa.value
+    };
+    
+    // Guardar la variable gigante en la memoria del navegador
+    localStorage.setItem("planSemanal", JSON.stringify(datosSemana));
+    
+    // Efecto visual: Mostrar mensaje de "¡Guardado!" y ocultarlo después de 2 seg
+    msgGuardado.style.opacity = "1";
+    setTimeout(() => { msgGuardado.style.opacity = "0"; }, 2000);
+});
+
+// 7. Arrancar la máquina mostrando el Lunes
+cargarDatosDia("Lunes");
+// ==========================================
+// MÓDULO: CALENDARIO INTERACTIVO
+// ==========================================
+const displayMes = document.querySelector("#mes-año-display");
+const cuadriculaDias = document.querySelector("#cuadricula-dias");
+const btnPrev = document.querySelector("#btn-mes-prev");
+const btnNext = document.querySelector("#btn-mes-next");
+
+const nombresMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+// Variable para saber qué mes estamos visualizando
+let fechaVista = new Date(); 
+
+function dibujarCalendario() {
+    cuadriculaDias.innerHTML = ""; // Limpiamos la cuadrícula
+    
+    const año = fechaVista.getFullYear();
+    const mes = fechaVista.getMonth();
+    
+    // Actualizamos el título del mes (Ej: Septiembre 2026)
+    displayMes.textContent = `${nombresMeses[mes]} ${año}`;
+    
+    // 1. Averiguar qué día de la semana cae el día 1 del mes (0=Dom, 1=Lun...)
+    const primerDia = new Date(año, mes, 1).getDay();
+    
+    // 2. Averiguar cuántos días en total tiene este mes
+    const diasEnMes = new Date(año, mes + 1, 0).getDate();
+    
+    // Obtenemos la fecha real de la computadora para marcar el "Hoy"
+    const hoy = new Date();
+    
+    // 3. Crear los cuadritos invisibles antes del día 1
+    for (let i = 0; i < primerDia; i++) {
+        const espacioVacio = document.createElement("div");
+        espacioVacio.classList.add("dia-cal", "vacio");
+        cuadriculaDias.appendChild(espacioVacio);
+    }
+    
+    // 4. Crear los cuadritos reales de los días
+    for (let dia = 1; dia <= diasEnMes; dia++) {
+        const cuadritoDia = document.createElement("div");
+        cuadritoDia.classList.add("dia-cal");
+        cuadritoDia.textContent = dia;
+        
+        // Si este cuadrito coincide con hoy, lo marcamos
+        if (dia === hoy.getDate() && mes === hoy.getMonth() && año === hoy.getFullYear()) {
+            cuadritoDia.classList.add("hoy");
+        }
+        
+        cuadriculaDias.appendChild(cuadritoDia);
+    }
+}
+
+// Botones de navegación (Restan o suman 1 mes a la fecha)
+btnPrev.addEventListener("click", function() {
+    fechaVista.setMonth(fechaVista.getMonth() - 1);
+    dibujarCalendario();
+});
+
+btnNext.addEventListener("click", function() {
+    fechaVista.setMonth(fechaVista.getMonth() + 1);
+    dibujarCalendario();
+});
+
+// Arrancar el motor al cargar la página
+dibujarCalendario();

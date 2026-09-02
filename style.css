@@ -252,3 +252,173 @@ h3 {
     gap: 15px;
     justify-content: center; /* Alinea los botones al centro */
 }
+/* ==========================================
+   MODO ESCALA DE GRISES
+   ========================================== */
+
+/* Fondo general y textos */
+body.tema-gris {
+    background-color: #e0e0e0;
+    color: #333333;
+}
+
+body.tema-gris .bento-card {
+    border-color: #aaaaaa;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Sobreescribimos los degradados de cada módulo */
+body.tema-gris #modulo-clima {
+    background: linear-gradient(135deg, #cccccc 0%, #999999 100%);
+    color: #222;
+}
+
+body.tema-gris #modulo-habitos {
+    background: linear-gradient(135deg, #e6e6e6 0%, #cccccc 100%);
+}
+
+body.tema-gris #modulo-sonidos {
+    background: linear-gradient(135deg, #f2f2f2 0%, #d9d9d9 100%);
+}
+
+body.tema-gris .columna-tareas {
+    background: linear-gradient(135deg, #f9f9f9 0%, #e0e0e0 100%);
+}
+
+body.tema-gris .btn-sonido.activo {
+    background-color: #999999;
+    color: white;
+}
+/* ==========================================
+   ESTILOS DEL PLANIFICADOR
+   ========================================== */
+   
+.botones-dias {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Permite que los botones bajen si la pantalla es pequeña */
+}
+
+/* Campos de escritura */
+.input-semanal {
+    width: 100%;
+    padding: 10px;
+    border: 1px dashed #c2d6ce;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-family: 'Quicksand', sans-serif;
+    box-sizing: border-box;
+    resize: vertical; /* Deja que el textarea se estire solo hacia abajo */
+}
+
+/* Agrupa etiqueta y campo */
+.grupo-input {
+    margin-bottom: 15px;
+    background: rgba(255,255,255,0.4);
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.grupo-input label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #4a6c5b;
+}
+
+/* Color de fondo especial para el planificador */
+#modulo-semanal { 
+    background: linear-gradient(135deg, #fdfbf7 0%, #f3ede2 100%); 
+}
+
+/* Compatibilidad con el Modo Gris */
+body.tema-gris #modulo-semanal { background: linear-gradient(135deg, #e6e6e6 0%, #cccccc 100%); }
+body.tema-gris .grupo-input { background: rgba(0,0,0,0.05); }
+body.tema-gris .input-semanal { border-color: #aaa; }
+body.tema-gris .grupo-input label { color: #333; }
+/* ==========================================
+   ESTILOS DEL CALENDARIO
+   ========================================== */
+.cabecera-calendario {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.dias-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: bold;
+    color: #4a6c5b;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.cuadricula-calendario {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columnas exactas */
+    gap: 5px;
+}
+
+.dia-cal {
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 8px;
+    font-size: 0.9em;
+    color: #5c4b51;
+    background-color: rgba(255, 255, 255, 0.4);
+    transition: all 0.2s ease;
+}
+
+.dia-cal:hover {
+    background-color: #a8e6cf; /* Efecto al pasar el mouse */
+    cursor: pointer;
+}
+
+/* Estilo especial para resaltar el día de hoy */
+.dia-cal.hoy {
+    background-color: #4a6c5b;
+    color: white;
+    font-weight: bold;
+}
+
+/* Espacios vacíos antes de que empiece el mes */
+.dia-cal.vacio {
+    background-color: transparent;
+    cursor: default;
+}
+
+/* Compatibilidad con el Modo Gris */
+body.tema-gris .dias-semana { color: #333; }
+body.tema-gris .dia-cal { color: #333; background-color: rgba(255, 255, 255, 0.6); }
+body.tema-gris .dia-cal:not(.vacio):hover { background-color: #ccc; }
+body.tema-gris .dia-cal.hoy { background-color: #555; color: white; }
+/* ==========================================
+   RESPONSIVE (Adaptación a celulares)
+   ========================================== */
+@media (max-width: 900px) {
+    #bento-grid {
+        grid-template-columns: 1fr; /* Pasa de 2 columnas a 1 sola que ocupa todo el ancho */
+        margin: 15px;
+        gap: 15px;
+    }
+
+    .bento-card {
+        padding: 20px 15px; /* Tarjetas un poco más compactas para ahorrar espacio */
+    }
+
+    /* Ajuste de botones para pantallas táctiles más pequeñas */
+    .botones-dias {
+        gap: 5px;
+    }
+    
+    .btn-sonido {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+}
