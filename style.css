@@ -401,18 +401,21 @@ body.tema-gris .dia-cal.hoy { background-color: #555; color: white; }
 /* ==========================================
    RESPONSIVE (Adaptación a celulares)
    ========================================== */
+/* ==========================================
+   RESPONSIVE (Adaptación a celulares)
+   ========================================== */
 @media (max-width: 900px) {
     #bento-grid {
-        grid-template-columns: 1fr; /* Pasa de 2 columnas a 1 sola que ocupa todo el ancho */
-        margin: 15px;
+        grid-template-columns: 1fr; 
+        margin: 20px auto; /* El 'auto' es la magia que lo centra */
+        width: 100%; /* Evita que queden espacios en blanco a los lados */
         gap: 15px;
     }
 
     .bento-card {
-        padding: 20px 15px; /* Tarjetas un poco más compactas para ahorrar espacio */
+        padding: 20px 15px; 
     }
 
-    /* Ajuste de botones para pantallas táctiles más pequeñas */
     .botones-dias {
         gap: 5px;
     }
