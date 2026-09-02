@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+    max-width: 100%;
+}
 /* 1. Fondo de puntitos y tipografía redondeada */
 body {
     background-color: #fdfbf7; /* Color papel crema */
@@ -404,11 +408,17 @@ body.tema-gris .dia-cal.hoy { background-color: #555; color: white; }
 /* ==========================================
    RESPONSIVE (Adaptación a celulares)
    ========================================== */
+/* ==========================================
+   RESPONSIVE (Adaptación a celulares)
+   ========================================== */
 @media (max-width: 900px) {
+    body {
+        padding: 10px; /* Reducimos el borde blanco en celulares */
+    }
+
     #bento-grid {
         grid-template-columns: 1fr; 
-        margin: 20px auto; /* El 'auto' es la magia que lo centra */
-        width: 100%; /* Evita que queden espacios en blanco a los lados */
+        margin: 0 auto; /* Centrado perfecto sin forzar el ancho */
         gap: 15px;
     }
 
