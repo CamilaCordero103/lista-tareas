@@ -2,10 +2,6 @@
     box-sizing: border-box;
     max-width: 100%;
 }
-/* Prevenir desbordamiento horizontal en toda la página */
-html, body {
-    overflow-x: hidden; 
-}
 
 /* Color pastel azul/celeste para el Calendario */
 #modulo-calendario {
@@ -433,8 +429,9 @@ body.tema-gris .dia-cal.hoy { background-color: #555; color: white; }
     
     #bento-grid {
         grid-template-columns: 1fr; 
-        margin: 0; /* Eliminamos el margen lateral conflictivo */
+        margin: 0 auto; /* El 'auto' es OBLIGATORIO para centrar */
         width: 100%;
+        max-width: 100%; /* Este es el verdadero seguro anti-desbordamiento */
         gap: 15px;
     }
 
